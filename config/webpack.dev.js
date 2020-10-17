@@ -1,0 +1,62 @@
+const path = require("path")
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+
+module.exports = {
+  entry: {
+    main: "./src/main.js"
+  },
+  mode: "development",
+  devtool: "source-map",
+  output: {
+    filename: "[name]-bundle.js",
+    path: path.resolve(__dirname, "../dist"),
+    publicPath: "/build"
+  },
+  devServer: {
+    contentBase: "dist",
+    overlay: true
+  },
+  module: {
+    rules: [
+      
+      {
+        test: /\.css$/,
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }]
+      },
+      {
+        test: /\.jpg$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[name].[ext]"
+            }
+          }
+        ]
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: path.resolve(__dirname, '../src', 'index.html'),
+      inject: 'head' // make sure aframe is there before html
+    }),
+    new webpack.ProvidePlugin({
+      process: 'process'
+      // ... necessary in webpack 5 to use the assert module which has an implicit dependency on process.
+    })
+
+  ],
+
+  
+
+}
