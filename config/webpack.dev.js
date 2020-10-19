@@ -30,7 +30,18 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "images/[name].[ext]"
+              name: "assets/[name].[ext]"
+            }
+          }
+        ]
+      },
+      {
+        test: /\.glb$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "assets/[name].[ext]"
             }
           }
         ]
@@ -48,6 +59,11 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, '../src', 'index.html'),
+      inject: 'head' // make sure aframe is there before html
+    }),
+    new HtmlWebPackPlugin({
+      template: path.resolve(__dirname, '../src', 'test_env_map.html'),
+      filename: 'test_env_map.html',
       inject: 'head' // make sure aframe is there before html
     }),
     new webpack.ProvidePlugin({
