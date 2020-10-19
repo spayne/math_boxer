@@ -1,40 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<title>three.js webgl - materials - environment maps</title>
 		<meta charset="utf-8">
-		<title>Math Boxer</title>
-		<style>
-			body { margin: 0; }
-			canvas { display: block; }
-		</style>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
 	</head>
 	<body>
 
-		<a-scene>      
-
-			<a-assets>
-				<a-asset-item id="five" src="./assets/five.glb"></a-asset-item>			
-			</a-assets>
-
-
-			
-
-			<!-- <a-entity gltf-model="#five" rotation="90 0 0"></a-entity> -->
-
-			
-
-			<a-sphere position="0 0 -5" radius=".05" color="#EF2D5E"></a-sphere>
-		  
-			  
-			  <a-entity gltf-model="#five" position="0 1 -2.5" rotation="0 0 0" flatShading="true" material="color: green"></a-entity>
-			  
-
-		
-			<a-cylinder position="0 0 0" radius="0.5" height="1" color="green" ></a-cylinder>
-		  <a-plane position="0 -0.3 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-		</a-scene>
-		
-
+		<div id="info">
+			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - webgl environment mapping example<br/>
+			Equirectangular Map by <a href="http://gl.ict.usc.edu/Data/HighResProbes/">University of Southern California</a><br/>
+			Spherical Map by <a href="http://www.pauldebevec.com/Probes/">Paul Debevec</a>
+		</div>
 
 	</body>
 </html>

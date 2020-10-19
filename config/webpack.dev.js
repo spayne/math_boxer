@@ -4,7 +4,8 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    main: "./src/main.js"
+    main: "./src/main.js",
+    env_main: "./src/env_main.js"
   },
   mode: "development",
   devtool: "source-map",
@@ -59,12 +60,13 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, '../src', 'index.html'),
-      inject: 'head' // make sure aframe is there before html
+      inject: 'head', // make sure aframe is there before html
+      chunks:["main"]
     }),
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, '../src', 'test_env_map.html'),
       filename: 'test_env_map.html',
-      inject: 'head' // make sure aframe is there before html
+      chunks:["env_main"]
     }),
     new webpack.ProvidePlugin({
       process: 'process'
