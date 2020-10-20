@@ -67,6 +67,44 @@ function main() {
     scene.add(light.target);
   }
 
+  		// Manager
+      var manager = new THREE.LoadingManager();
+      manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+        console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+      };
+  
+      manager.onLoad = function ( ) {
+        console.log( 'Loading complete!');
+      };
+  
+      manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+        console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+      };
+  
+      manager.onError = function ( url ) {
+        console.log( 'There was an error loading ' + url );
+      };
+  
+      // Textures
+  
+      var loader = new THREE.CubeTextureLoader(manager);
+      
+      
+    
+      loader.setPath( './assets/' );
+  
+      textureCube = loader.load( [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ] );
+      textureCube.encoding = THREE.sRGBEncoding;
+      var textureLoader = new THREE.TextureLoader(manager);
+  
+      textureEquirec = textureLoader.load( 'assets/2294472375_24a3b8ef46_o.jpg' );
+      textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
+      textureEquirec.encoding = THREE.sRGBEncoding;
+
+      sphereMaterial = new THREE.MeshLambertMaterial( { envMap: textureCube } );
+
+
+
   function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
     const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
     const halfFovY = THREE.MathUtils.degToRad(camera.fov * .5);
