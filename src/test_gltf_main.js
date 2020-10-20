@@ -1,5 +1,6 @@
 // dependencies
-require("../source_assets/five.glb")
+//require("../source_assets/five.glb")
+require("../source_assets/two.glb")
 require("./main.css")
 require("./test_gltf_main.html")
 
@@ -135,7 +136,7 @@ function main() {
 	
 
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('./assets/five.glb', (gltf) => {
+    gltfLoader.load('./assets/two.glb', (gltf) => {
       const root = gltf.scene;
       scene.add(root);
 
