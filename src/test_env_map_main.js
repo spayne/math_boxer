@@ -1,7 +1,5 @@
 require("./main.css")
-
-
-require("./test_env_map.html")
+require("./test_env_map_main.html")
 
 function requireAll(r) { r.keys().forEach(r); }
 requireAll(require.context('../source_assets/', true, /\.jpg$/));
@@ -72,13 +70,50 @@ const {OrbitControls} = require('three/examples/jsm/controls/OrbitControls');
 		textureEquirec.encoding = THREE.sRGBEncoding;
 
 		
-		scene.background = textureCube;
+		//scene.background = textureCube;
+
+
+		var gltf_loader = new THREE.GLTFLoader(manager);
+		gltf_loader.load(
+			// resource URL
+			'./assets/five.glb',
+			// called when the resource is loaded
+			function ( gltf ) 
+			{
+				console.log('aha!');
+		
+				scene.add( gltf.scene );
+		
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+		
+			},
+			// called while loading is progressing
+			function ( xhr ) {
+
+				console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+			},
+			// called when loading has errors
+			function ( error ) {
+
+				console.log( 'An error happened' );
+
+			}
+		);
+
+
 
 		var geometry = new THREE.IcosahedronBufferGeometry( 400, 5 );
 		//var geometry = new THREE.IcosahedronBufferGeometry( 400, 15 );
 		
 		sphereMaterial = new THREE.MeshLambertMaterial( { envMap: textureCube } );
 		sphereMesh = new THREE.Mesh( geometry, sphereMaterial );
+		sphereMesh.position.x = 50;
+		sphereMesh.position.y = 5;
 		scene.add( sphereMesh );
 
 		//

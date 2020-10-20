@@ -5,7 +5,8 @@ const webpack = require('webpack')
 module.exports = {
   entry: {
     main: "./src/main.js",
-    env_main: "./src/env_main.js"
+    test_env_map_main: "./src/test_env_map_main.js",
+    test_gltf_main: "./src/test_gltf_main.js"
   },
   mode: "development",
   devtool: "source-map",
@@ -64,9 +65,14 @@ module.exports = {
       chunks:["main"]
     }),
     new HtmlWebPackPlugin({
-      template: path.resolve(__dirname, '../src', 'test_env_map.html'),
-      filename: 'test_env_map.html',
-      chunks:["env_main"]
+      template: path.resolve(__dirname, '../src', 'test_env_map_main.html'),
+      filename: 'test_env_map_main.html',
+      chunks:["test_env_map_main"]
+    }),
+    new HtmlWebPackPlugin({
+      template: path.resolve(__dirname, '../src', 'test_gltf_main.html'),
+      filename: 'test_gltf_main.html',
+      chunks:["test_gltf_main"]
     }),
     new webpack.ProvidePlugin({
       process: 'process'
