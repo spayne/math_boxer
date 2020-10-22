@@ -6,7 +6,7 @@ const digit_models = [  "#zero", "#one", "#two", "#three", "#four",
 
 function spawn_equation(a_val, b_val) {
     const box = document.createElement("a-entity");
-    box.setAttribute("position", {x:0, y:1, z:-2.5});
+    box.setAttribute("position", {x:0, y:1, z:start_z});
 
     const a = document.createElement("a-entity");
     a.setAttribute("gltf-model", digit_models[a_val]);
@@ -27,11 +27,46 @@ function spawn_equation(a_val, b_val) {
     box.appendChild(b);
     
     document.querySelector("a-scene").appendChild(box);
+    box.a_node = a;
+    return box;
 }
 
-AFRAME.registerComponent("equation_spawner", {
+const active_equations = [];
+const start_z = -4.5;
+const start_y = 3;
+const max_z = 1;
 
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+
+AFRAME.registerComponent("equation_spawner", {
     init: function() {
-        spawn_equation(2,6);
+        const eq = spawn_equation(4,6);
+        eq.a_node.setAttribute("gltf-model", "#zero")
+        active_equations.push(eq);
+    },
+    tick: function() {
+
+        const dead_list = [];
+
+        active_equations.forEach(el => {
+            el.object3D.position.z += 0.02
+            if (el.object3D.position.z > max_z) {
+                dead_list.push(el);
+                active_equations.push(spawn_equation(4, getRndInteger(0, 9)));
+            }
+        });
+
+        let deleted_item_count = 0;
+        dead_list.forEach(idx => {
+            active_equations.splice(idx-deleted_item_count,1);
+            deleted_item_count++;
+        });
+
+
+
+
+
     }
   });
