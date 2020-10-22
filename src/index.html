@@ -10,7 +10,7 @@
 	</head>
 	<body>
 
-		<a-scene>      
+		<a-scene equation_spawner>      
 
 			<a-assets>
 				<a-asset-item id="one" src="./assets/one.glb"></a-asset-item>			
@@ -23,7 +23,13 @@
 				<a-asset-item id="eight" src="./assets/eight.glb"></a-asset-item>			
 				<a-asset-item id="nine" src="./assets/nine.glb"></a-asset-item>			
 				<a-asset-item id="zero" src="./assets/zero.glb"></a-asset-item>			
-				<a-asset-item id="x" src="./assets/x.glb"></a-asset-item>			
+				<a-asset-item id="x" src="./assets/x.glb"></a-asset-item>	
+				
+				<script id="boxesTemplate" type="text/html">
+					<a-box color="${box1color}" position="-1 0 -5"></a-box>
+					<a-box color="${box2color}" position="0 1 -5"></a-box>
+					<a-box color="${box3color}" position="1 0 -5"></a-box>
+				  </script>
 			</a-assets>
 
 			
@@ -35,9 +41,7 @@
 
 
 
-			<a-entity gltf-model="#three" position="-1 1 -2.5" apply_env_map></a-entity>
-			<a-entity gltf-model="#x" position="-0.5 1 -2.5" apply_env_map></a-entity>
-			<a-entity gltf-model="#five" position="0 1 -2.5" apply_env_map></a-entity>
+			
 			
 
 
@@ -54,7 +58,7 @@
 				<a-entity gltf-model="#zero" position="2.5 1 -2.5" apply_env_map></a-entity> -->
 
 		
-			<a-cylinder position="0 0 0" radius="0.5" height="1" color="green" ></a-cylinder>
+			
 		  <a-plane position="0 -0.3 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 		</a-scene>
 		
