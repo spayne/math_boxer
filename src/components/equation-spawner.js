@@ -53,11 +53,13 @@ AFRAME.registerComponent("equation_spawner", {
         active_equations.forEach(el => {
             el.object3D.position.z += 0.02
             if (el.object3D.position.z > max_z) {
+                el.parentNode.removeChild(el);
                 dead_list.push(el);
                 active_equations.push(spawn_equation(4, getRndInteger(0, 9)));
             }
         });
 
+        // clean up the active equations array
         let deleted_item_count = 0;
         dead_list.forEach(idx => {
             active_equations.splice(idx-deleted_item_count,1);
