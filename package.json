@@ -13,6 +13,7 @@
   "dependencies": {
     "aframe": "^1.0.4",
     "aframe-environment-component": "^2.0.0",
+    "annyang": "^2.6.1",
     "assert": "^2.0.0",
     "css-loader": "^4.3.0",
     "debug": "^4.2.0",
